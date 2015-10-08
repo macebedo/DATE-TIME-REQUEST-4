@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+
+<head>
+   <link rel="stylesheet" type="text/css" href="style-L9.css" />
+   <meta charset="utf-8">
+   <style type="text/css">
+      body {
+         margin-top: 0px;
+      }
+   </style>
+</head>
+
+<script type="text/javascript">
+   function dateCalculator() {
+      var fdate = document.getElementById("oneDate").value;
+      var oldformat1 = new Date(fdate);
+      var oldformat2 = new Date();
+      var d1 = new Date(fdate);
+      var d2 = new Date();
+      var newformat1 = dateFormater(oldformat1);
+      var newformat2 = dateFormater(oldformat2);
+      var timeDiff = d2.getTime() - d1.getTime();
+      var daysDiffCal = timeDiff / (1000 * 3600 * 24);
+      var daysDiff = Math.floor(daysDiffCal);
+      if (validateDate1()) {
+         document.getElementById("div2").innerHTML = "Inputed Date: " + newformat1 + " The current date is: " + newformat2 + " Days of difference is: " + daysDiff;
+      }
+   }
+
+   function dateFormater(newformat) {
+      var currentDt = newformat;
+      var mm = currentDt.getMonth() + 1;
+      var dd = currentDt.getDate();
+      var yyyy = currentDt.getFullYear();
+      var date = mm + '/' + dd + '/' + yyyy;
+      return (date);
+   }
+
+   function validateDate1() {
+      var joneDate = document.getElementById("oneDate").value;
+      var regex = /^\d{2}\/\d{2}\/\d{4}$/;
+      if (joneDate !== "") {
+         if (regex.test(joneDate)) {
+            document.getElementById("msg1").innerHTML = "";
+            return (true);
+         } else {
+            document.getElementById("div2").innerHTML = "";
+            document.getElementById("msg1").innerHTML = "X - Use mm/dd/yyyy date format!";
+            return (false);
+         }
+      }
+   }
+
+   function validateNumber() {
+      var jNumber = document.getElementById("rNumber").value;
+      var regex = /^\d{2}$/;
+      if (jNumber !== "") {
+         if (regex.test(jNumber) && (jNumber >= 10) && (jNumber <= 99)) {
+            document.getElementById("msg2").innerHTML = "";
+            return (true);
+         } else {
+            document.getElementById("div4").innerHTML = "";
+            document.getElementById("msg2").innerHTML = "X - Enter a number from 10 to 99!";
+            return (false);
+         }
+      }
+   }
+
+   function randomNumber() {
+      var max = document.getElementById("rNumber").value;
+      var x = Math.floor(Math.random() * (max - 10 + 1)) + 10;
+      if (validateNumber()) {
+         document.getElementById("div4").innerHTML = "The random whole number between 10 and " + max + " is: " + x;
+      }
+   }
+
+   function compareWords() {
+      var a = document.getElementById("word1").value;
+      var b = document.getElementById("word2").value;
+      var l1 = a.length;
+      var l2 = b.length;
+      var res1 = a.substring(0, l1);
+      var ctr;
+      var l2ctr = 0
+      var max = l2 - (l1 - 1);
+      document.getElementById("msg3").innerHTML = "";
+      if (l1 > l2) {
+		 document.getElementById("div6").innerHTML ="";
+         document.getElementById("msg3").innerHTML = "The string in field 1 must be shorter than field 2";
+      } else {
+
+         for (ctr = 0; ctr <= max; ctr++) {
+            res2 = b.substring(l2ctr, l1);
+            if ((res1 !== res2) && (ctr !== max)) {
+               l2ctr++;
+               l1++;
+            } else if (res1 == res2) {
+			   document.getElementById("msg3").innerHTML = "";
+               document.getElementById("div6").innerHTML = "Field 1: " + a + ", is a SUBSTRING of Field 2: " + b + ".";
+               break;
+            } else if (ctr == max) {
+				 document.getElementById("msg3").innerHTML = "";
+               document.getElementById("div6").innerHTML = "Field 1: " + a + ", is NOT a SUBSTRING of Field 2: " + b + ".";
+               break;
+            }
+         }
+      }
+   }
+</script>
+
+<body>
+   <h2>ASSIGNMENT 9</h2>
+   <table width="705" border="5" align="left">
+      <tr>
+         <td width="695" border="2" height="80">
+            <div align="left" id="div1">
+               <p align="left">Enter a date mm/dd/yyyy:&nbsp;
+                  <input name="oneDate" id="oneDate" type="text" size="9" onblur="validateDate1()" />
+                  <input name="button" type="button" value="Click Here" onclick="dateCalculator()" />
+               </p>
+            </div>&nbsp;&nbsp;
+         </td>
+      </tr>
+      <tr>
+         <td height="50">
+            <p id="msg1" class="error"></p>
+            <div id="div2">&nbsp;</div>
+         </td>
+
+      </tr>
+      <tr>
+         <td height="80">
+            <div id="div3">
+               <p align="left"> Enter a number from 10 to 99:&nbsp;
+                  <input name="rNumber" id="rNumber" type="text" size="9" onblur="validateNumber()" />
+                  <input name="button2" type="button" value="Click Here" onclick="randomNumber()" />
+               </p>
+            </div>&nbsp;&nbsp;
+         </td>
+      </tr>
+      <tr>
+         <td height="50">
+            <p id="msg2" class="error"></p>
+            <div id="div4">&nbsp;</div>
+         </td>
+      </tr>
+
+      <tr>
+         <td height="80">
+            <div id="div5">
+               <p align="left"> Enter two strings:&nbsp;&nbsp; Field 1:&nbsp;
+                  <input name="word1" id="word1" type="text" size="15" /> Field 2:&nbsp;
+                  <input name="word2" id="word2" type="text" size="15" />&nbsp;&nbsp;
+                  <input name="button3" type="button" value="Click Here" onclick="compareWords()" />
+               </p>
+            </div>&nbsp; &nbsp;</td>
+      </tr>
+      <tr>
+         <td height="60">
+            <p id="msg3" class="error"></p>
+            <div id="div6">&nbsp;</div>
+         </td>
+      </tr>
+   </table>
+</body>
+
+</html>
