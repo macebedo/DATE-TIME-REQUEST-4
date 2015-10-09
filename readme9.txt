@@ -1,4 +1,4 @@
-This is not a tutorials. There are my codes created for the request below:
+This is not a tutorial. There are my codes created for the request below:
 
 
 Create a basic webpage that will include three separate user input areas, each with their own button for processing.  When each input areas button is clicked, the output will go to an on page output area specific to that input. You will have three input areas with buttons and three output areas.
